@@ -4,6 +4,8 @@ using System.Collections;
 public class Player : Agent
 {
     CharacterController controller = null;
+
+    
     public void Awake()
     {
         _fsm = new FSMManager(this, E_ActionTYpe.Idle);
@@ -14,9 +16,17 @@ public class Player : Agent
         controller = GetComponent<CharacterController>();
     }
 
+    private void Start()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down,out hit, 50f))
+        {
+            transform.position = hit.point;
+        }
+    }
     public override void Move(Vector3 pos)
     {
-        controller.Move(pos);
+        controller.Move(pos * Time.deltaTime * BlackBoard.nowSpeed);
     }
 
     private void Update()

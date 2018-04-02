@@ -23,7 +23,8 @@ public class PlayerIdleAction : FSMBaseAction
     }
     public override void Listen()
     {
-        if (!Input.GetKey(KeyCode.W))
+        Vector2 move = InputManager.GetInputVector2();
+        if(move.magnitude<0.2f)
         {
             _owner.SetProperty(E_PropType.Speed, 0);
         }

@@ -44,6 +44,7 @@ public class FSMBaseAction {
         _actionType = type;
         _agent = agent;
         _owner = owner;
+        Initialize();
     }
 
 
